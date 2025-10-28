@@ -1,0 +1,20 @@
+@startuml UseCase_Banking
+left to right direction
+actor Customer
+actor Staff as "BankStaff"
+
+rectangle BankSystem {
+  Customer -- (Open Account)
+  Customer -- (Deposit Funds)
+  Customer -- (Withdraw Funds)
+  Customer -- (View Account Balance)
+  Customer -- (View Transaction History)
+  Staff -- (Post Interest)
+  Staff -- (Create Customer)
+  Staff -- (Manage Accounts)
+  Staff -- (Run Reports)
+
+  (Open Account) .> (Create Customer) : <<include>>
+  (Deposit Funds) .> (View Account Balance) : <<include>>
+}
+@enduml

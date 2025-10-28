@@ -1,0 +1,12 @@
+@startuml Seq_Login
+actor Staff
+participant LoginView
+participant LoginController
+participant AuthService
+
+Staff -> LoginView: enter credentials
+LoginView -> LoginController: submitCredentials(username,password)
+LoginController -> AuthService: authenticate(username,password)
+AuthService --> LoginController: success/failure
+LoginController -> LoginView: showResult()
+@enduml
