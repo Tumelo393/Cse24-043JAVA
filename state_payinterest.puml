@@ -1,9 +1,0 @@
-@startuml State_PayInterest
-[*] --> Idle
-Idle --> Calculating : scheduledEvent
-Calculating --> Applying : calculateCompleted
-Applying --> Recording : applyCompleted
-Recording --> Idle : recordCompleted
-Recording --> Error : dbFailure
-Error --> Idle : retry
-@enduml
