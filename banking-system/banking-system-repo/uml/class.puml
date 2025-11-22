@@ -1,0 +1,61 @@
+@startuml Class_Banking
+package model {
+  interface InterestPayable {
+    +void payInterest()
+  }
+
+  abstract class Account {
+    -String accountNumber
+    -double balance
+    -String branch
+    -List<Transaction> transactions
+    +Account(String accountNumber, double initialDeposit)
+    +void deposit(double amount)
+    +void withdraw(double amount)
+    +double getBalance()
+  }
+
+  class SavingsAccount extends Account implements InterestPayable {
+    +SavingsAccount(String accNo, double initialDeposit)
+    +void payInterest()
+  }
+
+  class InvestmentAccount extends Account implements InterestPayable {
+    +InvestmentAccount(String accNo, double initialDeposit)
+    +void payInterest()
+  }
+
+  class ChequeAccount extends Account {
+    -String employer
+    +ChequeAccount(String accNo, double initialDeposit, String employer)
+  }
+
+  class Customer {
+    -String id
+    -String firstName
+    -String lastName
+    -String address
+    -String phone
+    -boolean isEmployed
+    -List<Account> accounts
+    +void addAccount(Account)
+    +List<Account> getAccounts()
+  }
+
+  class Transaction {
+    -String id
+    -Date timestamp
+    -double amount
+    -String type
+    +Transaction(String id, double amount, String type)
+  }
+}
+
+Customer "1" -- "0..*" Account
+Account "1" -- "0..*" Transaction
+InterestPayable <|.. SavingsAccount
+InterestPayable <|.. InvestmentAccount
+Account <|-- SavingsAccount
+Account <|-- InvestmentAccount
+Account <|-- ChequeAccount
+@enduml
